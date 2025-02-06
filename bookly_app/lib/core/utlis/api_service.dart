@@ -9,5 +9,4 @@ class ApiService {
     Map<String , dynamic > responseData = response.data ;
     return responseData;
   }
-
 }
