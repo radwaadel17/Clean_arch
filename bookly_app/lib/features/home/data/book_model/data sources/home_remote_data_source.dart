@@ -21,9 +21,14 @@ class HomeRemoteDataSourceImp implements HomeRemoteDataSource{
   }
 
   @override
-  Future<List<BookEntity>> fetchNewestBooks() {
-    // TODO: implement fetchNewestBooks
-    throw UnimplementedError();
+  Future<List<BookEntity>> fetchNewestBooks() async{
+     Map<String , dynamic > data = await ApiService(Dio()).getData('q=programming&Sorting=newest');
+    List<dynamic> dataList = data['items'];
+    List<BookEntity> books = [];
+    for(int i = 0 ; i < dataList.length ; i++){
+      books.add(BookModel.fromJson(dataList[i]));
+    }
+    return books;    
   }
 
 }
