@@ -19,7 +19,7 @@ class HomeRemoteDataSourceImp implements HomeRemoteDataSource{
     for(int i = 0 ; i < dataList.length ; i++){
       books.add(BookModel.fromJson(dataList[i]));
     }
-    var box = Hive.box(kBoxName);
+    var box = Hive.box(kBoxNameF);
     box.addAll(books);
     return books;    
   }
@@ -32,7 +32,7 @@ class HomeRemoteDataSourceImp implements HomeRemoteDataSource{
     for(int i = 0 ; i < dataList.length ; i++){
       books.add(BookModel.fromJson(dataList[i]));
     }
-    var box = Hive.box(kBoxName);
+    var box = Hive.box(kBoxNameN);
     box.addAll(books);
     return books;    
   }
