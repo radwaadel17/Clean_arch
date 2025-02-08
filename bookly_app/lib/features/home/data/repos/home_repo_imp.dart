@@ -20,9 +20,13 @@ class HomeRepoImp implements HomeRepo {
       }
       var books = await homeRemoteDataSource.fetchFeaturedBooks();
       return right(books);
-    } on DioException catch (e) {
-      return Left(Faluire());
+    } catch(e) {
+      if(e is DioException){
+              return Left(ServerFailure.FromDioError(e));
+      }
+      return left(ServerFailure(errorMessage: e.toString()));
     }
+
   }
 
   @override
@@ -34,8 +38,11 @@ class HomeRepoImp implements HomeRepo {
       }
       var books = await homeRemoteDataSource.fetchNewestBooks();
       return right(books);
-    } on DioException catch (e) {
-      return Left(Faluire());
+    } catch(e) {
+      if(e is DioException){
+              return Left(ServerFailure.FromDioError(e));
+      }
+      return left(ServerFailure(errorMessage: e.toString()));
     }
   }
 }
