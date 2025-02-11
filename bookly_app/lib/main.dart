@@ -1,7 +1,13 @@
 import 'package:bookly_app/core/utlis/approuter.dart';
 import 'package:bookly_app/core/utlis/constants.dart';
+import 'package:bookly_app/core/utlis/service_locator.dart';
+import 'package:bookly_app/features/home/data/data%20sources/home_local_data_source.dart';
+import 'package:bookly_app/features/home/data/data%20sources/home_remote_data_source.dart';
+import 'package:bookly_app/features/home/data/repos/home_repo_imp.dart';
 import 'package:bookly_app/features/home/domain/entites/book_entity.dart';
+import 'package:bookly_app/features/home/presentaion/manager/fetch_best_seller_cubit/fetch_best_seller_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main()async {
@@ -17,13 +23,18 @@ class BooklyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: Approuter.router,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          scaffoldBackgroundColor: Scolor,
-          brightness: Brightness.dark,
-          fontFamily: 'Montserrat'),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => FetchBestSellerCubit(getIt<HomeRepoImp>()),)
+      ],
+      child: MaterialApp.router(
+        routerConfig: Approuter.router,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            scaffoldBackgroundColor: Scolor,
+            brightness: Brightness.dark,
+            fontFamily: 'Montserrat'),
+      ),
     );
   }
 }
