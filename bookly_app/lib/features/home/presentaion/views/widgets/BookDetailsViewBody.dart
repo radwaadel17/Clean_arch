@@ -20,7 +20,7 @@ class BookDetailsViewBody extends StatelessWidget {
               const CustomAppBarForBookDetailsView(),
               SizedBox(
                   height: MediaQuery.of(context).size.height * 0.34,
-                  child: const CustomBookImage()),
+                  child: const CustomBookImage(url: '',)),
               const SizedBox(height: 43),
               const Text(
                 'The Jungle Book',

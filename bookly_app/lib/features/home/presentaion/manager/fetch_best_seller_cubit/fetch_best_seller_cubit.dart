@@ -13,7 +13,7 @@ class FetchBestSellerCubit extends Cubit<FetchBestSellerStates> {
     result.fold((faluire) {
       emit(FetchBestSellerStatesFaluire(faluire.errorMessage));
     }, (books) {
-      emit(FetchBestSellerStatesSucsess());
+      emit(FetchBestSellerStatesSucsess(books));
     });
   }
 }

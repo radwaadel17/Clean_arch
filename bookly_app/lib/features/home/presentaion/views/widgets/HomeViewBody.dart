@@ -2,7 +2,6 @@
 import 'package:bookly_app/core/utlis/styles.dart';
 import 'package:bookly_app/features/home/presentaion/views/widgets/BestSellerListView.dart';
 import 'package:bookly_app/features/home/presentaion/views/widgets/CustomAppbar.dart';
-import 'package:bookly_app/features/home/presentaion/views/widgets/ListViewHorizontal.dart';
 import 'package:bookly_app/features/home/presentaion/views/widgets/bloc_buider_list_view_horizontal.dart';
 import 'package:flutter/material.dart';
 
