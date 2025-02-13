@@ -12,9 +12,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main()async {
   await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
-  await Hive.openBox(kBoxNameF);
-  await Hive.openBox(kBoxNameN);
+  await Hive.openBox<BookEntity>(kBoxNameF);
+  await Hive.openBox<BookEntity>(kBoxNameN);
   Bloc.observer = SimpleBlocObserver();
+  setup();
   runApp(const BooklyApp());
 }
 
@@ -25,7 +26,7 @@ class BooklyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => FetchBestSellerCubit(getIt<HomeRepoImp>()),)
+        BlocProvider(create: (context) => FetchBestSellerCubit(getIt<HomeRepoImp>())..fetchBestSellerMethod(),)
       ],
       child: MaterialApp.router(
         routerConfig: Approuter.router,
