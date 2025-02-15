@@ -14,7 +14,8 @@ class ListViewHorizontal extends StatefulWidget {
 
 class _ListViewHorizontalState extends State<ListViewHorizontal> {
   late ScrollController _scrollController;
-  var pagenumber = 1 ;
+  var pagenumber = 1;
+  bool isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -22,10 +23,15 @@ class _ListViewHorizontalState extends State<ListViewHorizontal> {
     _scrollController.addListener(_onScroll);
   }
 
-  void _onScroll() {
+  void _onScroll() async {
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent * 0.7) {
-        BlocProvider.of<FetchBestSellerCubit>(context).fetchBestSellerMethod(pagenumber: pagenumber++);
+      if (isLoading == false){
+        isLoading = true;
+        await BlocProvider.of<FetchBestSellerCubit>(context)
+            .fetchBestSellerMethod(pagenumber: pagenumber++);
+        isLoading = false;
+      }
     }
   }
 
