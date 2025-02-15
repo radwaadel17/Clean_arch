@@ -11,9 +11,9 @@ abstract class HomeRemoteDataSource{
 }
 class HomeRemoteDataSourceImp implements HomeRemoteDataSource{
   @override
-  Future<List<BookEntity>> fetchFeaturedBooks() async {
+  Future<List<BookEntity>> fetchFeaturedBooks({int pagenumber = 0}) async {
     
-    Map<String , dynamic > data = await ApiService(Dio()).getData('q=programming');
+    Map<String , dynamic > data = await ApiService(Dio()).getData('q=programming&startIndex=${pagenumber * 10}');
     List<dynamic> dataList = data['items'];
     List<BookEntity> books = [];
     for(int i = 0 ; i < dataList.length ; i++){

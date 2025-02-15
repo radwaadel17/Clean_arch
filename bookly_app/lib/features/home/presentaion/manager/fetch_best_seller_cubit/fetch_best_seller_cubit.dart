@@ -7,9 +7,9 @@ class FetchBestSellerCubit extends Cubit<FetchBestSellerStates> {
 
   final HomeRepo homeRepo;
 
-  Future<void> fetchBestSellerMethod() async {
+  Future<void> fetchBestSellerMethod({int pagenumber = 0}) async {
     emit(FetchBestSellerStatesLoading());
-    var result = await homeRepo.fetchFeaturedBooks();
+    var result = await homeRepo.fetchFeaturedBooks(pagenumber: pagenumber);
     result.fold((faluire) {
       emit(FetchBestSellerStatesFaluire(faluire.errorMessage));
     }, (books) {
