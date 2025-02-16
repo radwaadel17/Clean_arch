@@ -4,6 +4,10 @@ class FetchBestSellerStates {}
 
 class FetchBestSellerStatesInit extends FetchBestSellerStates {}
 class FetchBestSellerStatesPaginationLoading extends FetchBestSellerStates {}
+class FetchBestSellerStatesPaginationFaluire extends FetchBestSellerStates {
+  String errorMessage;
+  FetchBestSellerStatesPaginationFaluire(this.errorMessage);
+}
 
 
 class FetchBestSellerStatesFaluire extends FetchBestSellerStates {

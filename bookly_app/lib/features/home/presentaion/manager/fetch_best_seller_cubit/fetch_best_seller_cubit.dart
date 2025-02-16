@@ -15,7 +15,13 @@ class FetchBestSellerCubit extends Cubit<FetchBestSellerStates> {
     }
     var result = await homeRepo.fetchFeaturedBooks(pagenumber: pagenumber);
     result.fold((faluire) {
-      emit(FetchBestSellerStatesFaluire(faluire.errorMessage));
+      if(pagenumber == 0){
+       emit(FetchBestSellerStatesFaluire(faluire.errorMessage));
+      }
+      else {
+        emit(FetchBestSellerStatesFaluire(faluire.errorMessage));
+      }
+      
     }, (books) {
       emit(FetchBestSellerStatesSucsess(books));
     });

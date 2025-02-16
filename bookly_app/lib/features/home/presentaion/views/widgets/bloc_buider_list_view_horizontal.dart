@@ -11,31 +11,34 @@ class ListViewHoricontalBlocBuilder extends StatefulWidget {
   });
 
   @override
-  State<ListViewHoricontalBlocBuilder> createState() => _ListViewHoricontalBlocBuilderState();
+  State<ListViewHoricontalBlocBuilder> createState() =>
+      _ListViewHoricontalBlocBuilderState();
 }
 
-class _ListViewHoricontalBlocBuilderState extends State<ListViewHoricontalBlocBuilder> {
-
+class _ListViewHoricontalBlocBuilderState
+    extends State<ListViewHoricontalBlocBuilder> {
   List<BookEntity> booksItmes = [];
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<FetchBestSellerCubit, FetchBestSellerStates>(
       listener: (context, state) {
-        if(state is FetchBestSellerStatesSucsess){
+        if (state is FetchBestSellerStatesSucsess) {
           booksItmes.addAll(state.books);
         }
       },
       builder: (context, state) {
-       if (state is FetchBestSellerStatesSucsess || state is FetchBestSellerStatesPaginationLoading){
-        return ListViewHorizontal(books: booksItmes);
-       }
-       else if (state is FetchBestSellerStatesFaluire){
-        return Text(state.errorMessage);
-       }
-       else{
-        return const Center(child:CircularProgressIndicator(),);
-       }
-      },  
-      );
+        if (state is FetchBestSellerStatesSucsess ||
+            state is FetchBestSellerStatesPaginationLoading
+            || state is FetchBestSellerStatesFaluire) {
+          return ListViewHorizontal(books: booksItmes);
+        } else if (state is FetchBestSellerStatesFaluire) {
+          return Text(state.errorMessage);
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
   }
 }
